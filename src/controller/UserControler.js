@@ -55,6 +55,40 @@ const registerUser = async (req, res) => {
 }
 
 
+const loginUser = async(req, res) => {
+  
+  const {email, password} = req.body
+
+  const user = await UserModel.findOne({where: {email}})
+
+  //Check if user exists
+  if(!user){
+    res.status(404).json({
+      errors: ["Usário não encontrado"]
+    })
+
+    return
+  }
+
+  //Check if password matches
+  if(!await brcypt.compareSync(password, user.password)){
+    res.status(422).json({
+      errors: ["Senha inválida"]
+    })
+
+    return
+  }
+
+  //Return user with token
+  res.status(200).json({
+    id: user.id, 
+    profileImage: user.profileImage,
+    token: generateToken(user.id)
+  })
+
+}
+
 module.exports = {
-  registerUser
+  registerUser,
+  loginUser
 }
