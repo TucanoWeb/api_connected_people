@@ -21,6 +21,10 @@ app.use(routes)
 require("./config/db").connect()
 
 
+//Model
+require("./model/UserModel")
+
+
 const port = 5000
 
 
