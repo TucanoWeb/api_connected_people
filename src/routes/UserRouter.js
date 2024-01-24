@@ -1,13 +1,15 @@
 const UserRouter = require("express").Router()
 
 //Controller 
-const {registerUser} = require("../controller/UserControler")
+const {registerUser, loginUser} = require("../controller/UserControler")
 
 // Middlewares
 const validate = require("../middlewares/handleValidation");
-const {userRegisterValidation} = require("../middlewares/userValidations")
+const {userRegisterValidation, userLoginValidation} = require("../middlewares/userValidations")
 
+//Routes
 UserRouter.post("/register", userRegisterValidation(),  validate, registerUser )
+UserRouter.post("/login", userLoginValidation(), validate, loginUser )
 
 
 module.exports = UserRouter
