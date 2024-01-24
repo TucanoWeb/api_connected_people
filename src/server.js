@@ -16,6 +16,11 @@ const routes = require("./routes/Router");
 app.use(routes)
 
 
+
+//Conection DB
+require("./config/db").connect()
+
+
 const port = 5000
 
 
