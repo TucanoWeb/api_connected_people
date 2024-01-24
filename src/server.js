@@ -1,5 +1,4 @@
 const express = require("express");
-const routes = require("./routes/Router");
 const app = express()
 
 
@@ -7,9 +6,15 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//Test route
+app.get("/", (req, res) => {
+  res.send("Api Working")
+})
 
 //Config Routes
-app.use("/", routes)
+const routes = require("./routes/Router");
+app.use(routes)
+
 
 const port = 5000
 
